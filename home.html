@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+    <title>READ QUOTES</title>
+</head>
+<body>
+    <div class="container">
+        <video src="image/n1.mp4" muted loop autoplay></video>
+        <div class="overlay"></div>
+        <div class="card">
+            <h1>QUOTES</h1>
+            <p>
+                
+               <p id="quote"></p>
+                <div class="mid"><h3 id="tags" class="mid"></h3>
+                <span id="auths"></span>
+                </div>
+            </p>
+            <button id="btn" class="btnok">NEW QUOTES</button>
+        </div>
+    </div>
+    <script>
+        const q = document.getElementById("quote");
+        const tags = document.getElementById("tags");
+        const auth = document.getElementById("auths");
+        const btn = document.getElementById("btn");
+        let realData = "";
+
+        const getNewQuotes = () => {
+            let rnum = Math.floor(Math.random() * 1000);
+            //console.log(realData.quotes[rnum].author);
+           q.innerText = `${realData.quotes[rnum].text}` ;
+           auth.innerText = `${realData.quotes[rnum].author}` ;
+           tags.innerText = `${realData.quotes[rnum].tag}` ;
+        };
+
+        const getQuotes = async () =>{
+            const api = "https://goquotes-api.herokuapp.com/api/v1/all/quotes"
+
+            try{
+                    let data = await fetch(api);
+                    realData = await data.json();
+                   
+                    getNewQuotes();
+            }
+            catch(error){
+
+            }
+        };
+        btn.addEventListener("click", getNewQuotes);
+        getQuotes();
+    </script>
+    
+</body>
+</html>
