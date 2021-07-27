@@ -33,18 +33,18 @@
         const getNewQuotes = () => {
             let rnum = Math.floor(Math.random() * 1000);
             //console.log(realData.quotes[rnum].author);
-           q.innerText = `${realData.quotes[rnum].text}` ;
-           auth.innerText = `${realData.quotes[rnum].author}` ;
-           tags.innerText = `${realData.quotes[rnum].tag}` ;
+           q.innerText = `${realData[rnum].text}` ;
+           auth.innerText = `${realData[rnum].author}` ;
+           //tags.innerText = `${realData.quotes[rnum].tag}` ;
         };
 
         const getQuotes = async () =>{
-            const api = "https://goquotes-api.herokuapp.com/api/v1/all/quotes"
+            const api = "https://type.fit/api/quotes"
 
             try{
                     let data = await fetch(api);
                     realData = await data.json();
-                   
+                    console.log(realData);
                     getNewQuotes();
             }
             catch(error){
